@@ -1,0 +1,53 @@
+﻿<p *ngIf="!categories">Loading...</p>
+
+<div id="main-panel" *ngIf="categories">
+  <div class="input-group mb-3">
+    <label class="input-group-text" for="select-category">Category</label>
+    <select class="form-select" id="select-category" (change)="categorySelected($event.target)">
+      <option selected [value]="null">Select...</option>
+      <option *ngFor="let category of categories" [value]=toJson(category)>{{category.name}}</option>
+    </select>
+    <button class="btn btn-outline-secondary" (click)="addCategoryMenuVisibleToggle()">
+      <span *ngIf="!addCategoryMenuVisible">New</span>
+      <span *ngIf="addCategoryMenuVisible">Hide</span>
+    </button>
+    <button class="btn btn-outline-danger" (click)="deleteCategory()" *ngIf="selectedCategory">Delete</button>
+  </div>
+
+  <div class="input-group mb-3" *ngIf="addCategoryMenuVisible">
+    <input type="text" class="form-control" placeholder="Category name" aria-label="Category name"
+           aria-describedby="button-addon2" id="category-name-input">
+    <button class="btn btn-outline-success" type="button" id="button-addon2" (click)="addCategory()">Add</button>
+  </div>
+
+  <div class="input-group mb-3" *ngIf="selectedCategory">
+    <label class="input-group-text" for="select-note">Note</label>
+    <select class="form-select" id="select-note" (change)="noteSelected($event.target)">
+      <option selected [value]="null">Select...</option>
+      <option *ngFor="let note of notes" [value]=toJson(note)>{{note.name}}</option>
+    </select>
+    <button class="btn btn-outline-secondary" (click)="addNoteMenuVisibleToggle()">
+      <span *ngIf="!addNoteMenuVisible">New</span>
+      <span *ngIf="addNoteMenuVisible">Hide</span>
+    </button>
+  </div>
+
+  <div class="input-group mb-3" *ngIf="addNoteMenuVisible" aria-describedby="button-addon3">
+    <input type="text" class="form-control" placeholder="New Note name" aria-label="Note name" id="note-name-input">
+    <button class="btn btn-outline-success" type="button" id="button-addon3" (click)="addNote()">Add</button>
+    <div class="input-group">
+      <span class="input-group-text">New Note Text</span>
+      <textarea class="form-control" aria-label="With textarea" id="note-content-input"></textarea>
+    </div>
+  </div>
+
+  <div class="input-group mb-3" *ngIf="selectedNote" aria-describedby="button-addon4">
+    <input type="text" class="form-control" placeholder="Note name" aria-label="Note name" id="current-note-name-input">
+    <button class="btn btn-outline-success" type="button" id="button-addon4" (click)="updateNote()">Update</button>
+    <button class="btn btn-outline-danger" type="button" id="button-addon5" (click)="deleteNote()">Delete</button>
+    <div class="input-group">
+      <span class="input-group-text">Note Text</span>
+      <textarea class="form-control" aria-label="With textarea" id="current-note-content-input"></textarea>
+    </div>
+  </div>
+</div>

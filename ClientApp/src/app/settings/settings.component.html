@@ -1,0 +1,17 @@
+﻿<form>
+  <div class="mb-3">
+    <label for="email-input" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email-input">
+  </div>
+  <div class="mb-3">
+    <label for="username-input" class="form-label">Username</label>
+    <input type="text" class="form-control" id="username-input">
+  </div>
+  <div class="mb-3">
+    <label for="password-input" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password-input">
+  </div>
+  <button class="btn btn-success" (click)="save()">Save</button>
+</form>
+<br>
+<p *ngIf="LogInComponent.user">Account created on {{LogInComponent.user.creationDate}}</p>
